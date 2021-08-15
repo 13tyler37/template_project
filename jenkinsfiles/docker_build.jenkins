@@ -15,18 +15,18 @@ pipeline {
             steps {
                 echo " ============== start building image =================="
                 dir ('docker/toolbox') {
-                	sh 'docker build -t first_image . '
+                	sh 'docker build -t first-image . '
                 }
             }
         }
         stage("run docker container") {
             steps {
                 echo "============ start run container ===================="
-                sh 'docker run -d first_image'
+                sh 'docker run -d first-image'
             }
         }
         stage("run containter on test server") {
-            def dockerRun = 'docker run -d -name first_container first_image'
+            def dockerRun = 'docker run -d -name first-container first-image'
             sshagent(['192.168.1.17']) {
                 sh 'ssh -o StrictHostKeyChecking=no jenkins@192.168.1.17 ${dockerRun}'
             }
