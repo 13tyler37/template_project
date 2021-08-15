@@ -22,7 +22,7 @@ pipeline {
         stage("run docker container") {
             steps {
                 echo "============ start run container ===================="
-                sh 'docker run first_image'
+                sh 'docker run -d first_image'
             }
         }
     }
