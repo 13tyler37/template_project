@@ -26,9 +26,11 @@ pipeline {
             }
         }
         stage("run containter on test server") {
-            def dockerRun = 'docker run -d -name first-container first-image'
-            sshagent(['192.168.1.17']) {
+            steps {
+                def dockerRun = 'docker run -d -name first-container first-image'
+                sshagent(['192.168.1.17']) {
                 sh 'ssh -o StrictHostKeyChecking=no jenkins@192.168.1.17 ${dockerRun}'
+                }
             }
         }
     }
